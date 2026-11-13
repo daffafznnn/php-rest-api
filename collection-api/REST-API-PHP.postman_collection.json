@@ -1,0 +1,766 @@
+{
+  "info": {
+    "name": "REST API PHP",
+    "description": "Koleksi request untuk API produk dan kategori. Jalankan reset_test_data.sql sebelum menjalankan folder skenario agar hasilnya sama dengan test matrix.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List products, page 2 limit 5 (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?page=2&limit=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search products by name (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?q=kopi",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "kopi"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search products with pagination (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?q=kopi&limit=2&page=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "kopi"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Product detail (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create product (expect 201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kopi Excelsa\",\n  \"price\": 78000,\n  \"stock\": 9\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update product (expect 200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Arabika Premium\",\n  \"price\": 95000,\n  \"stock\": 20\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete product (expect 200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?id=14",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "14"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List categories (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Category detail (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create category (expect 201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Frozen food\",\n  \"description\": \"Makanan beku\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update category (expect 200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Camilan\",\n  \"description\": \"Makanan ringan harian\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete category (expect 200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=3",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Success scenarios",
+      "item": [
+        {
+          "name": "S-01 Menampilkan daftar kategori (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            },
+            "description": "Daftar berisi 4 kategori bawaan, diurutkan dari id terkecil"
+          }
+        },
+        {
+          "name": "S-02 Menampilkan detail kategori dengan ID valid (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Data kategori Minuman dengan field id, name, description, dan created_at"
+          }
+        },
+        {
+          "name": "S-03 Membuat kategori dengan input valid (expect 201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Frozen food\",\n  \"description\": \"Makanan beku\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Kategori baru dikembalikan pada field data lengkap dengan id"
+          }
+        },
+        {
+          "name": "S-04 Memperbarui kategori dengan ID dan input valid (expect 200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Camilan\",\n  \"description\": \"Makanan ringan harian\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Kategori dengan id 2 berubah menjadi Camilan"
+          }
+        },
+        {
+          "name": "S-05 Menghapus kategori dengan ID valid (expect 200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=3",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            },
+            "description": "Pesan Kategori dihapus tanpa data kategori"
+          }
+        },
+        {
+          "name": "S-06 Mencari produk dengan parameter q (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?q=kopi",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "kopi"
+                }
+              ]
+            },
+            "description": "3 produk yang namanya memuat kata kopi, dengan meta.total bernilai 3"
+          }
+        },
+        {
+          "name": "S-07 Menampilkan produk dengan page dan limit valid (expect 200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?page=2&limit=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "5 produk pada halaman 2 dari 3 halaman, dengan meta.total bernilai 14"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Failed scenarios",
+      "item": [
+        {
+          "name": "F-01 Detail kategori dengan format ID tidak valid (expect 400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=abc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "abc"
+                }
+              ]
+            },
+            "description": "Pesan ID tidak valid"
+          }
+        },
+        {
+          "name": "F-02 Detail kategori yang tidak ditemukan (expect 404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=9999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "9999"
+                }
+              ]
+            },
+            "description": "Pesan Kategori tidak ditemukan"
+          }
+        },
+        {
+          "name": "F-03 Membuat kategori dengan name kosong (expect 422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Pesan Nama kategori wajib diisi"
+          }
+        },
+        {
+          "name": "F-04 Membuat kategori dengan nama yang sudah ada (expect 422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Minuman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Pesan Nama kategori sudah digunakan tanpa detail SQL"
+          }
+        },
+        {
+          "name": "F-05 Memperbarui kategori dengan body yang tidak valid (expect 422)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Pesan Nama kategori wajib diisi"
+          }
+        },
+        {
+          "name": "F-06 Pagination dengan parameter tidak valid (expect 400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?page=0&limit=101",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products.php"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "101"
+                }
+              ]
+            },
+            "description": "Pesan bahwa page harus berupa bilangan bulat positif"
+          }
+        },
+        {
+          "name": "F-07 HTTP method yang tidak didukung (expect 405)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/categories.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categories.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Minuman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Pesan HTTP method tidak didukung dan header Allow berisi GET, POST, PUT, DELETE"
+          }
+        }
+      ]
+    }
+  ]
+}
